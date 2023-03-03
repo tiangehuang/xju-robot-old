@@ -27,15 +27,12 @@ global_costmap:
   keep_out_layer:
     enabled: true
     fill_zones: false
-    inflation_option: 3
 
   obstacle_layer:
     observation_sources: scan #camera
-    scan: { sensor_frame: top_laser_link, data_type: PointCloud2, topic: vlp_points, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true,  min_obstacle_height: -0.015, max_obstacle_height: 0.63 }
-    #scan: { sensor_frame: laser_link, data_type: LaserScan, topic: scan, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true, min_obstacle_height: -1.0 }
+    scan: { sensor_frame: laser_link, data_type: LaserScan, topic: scan, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true, min_obstacle_height: -1.0 }
     #camera: { sensor_frame: camera_front_link, data_type: PointCloud2, topic: /camera_front/depth/points, obstacle_range: 3.0, raytrace_range: 3.5, marking: true, clearing: true, min_obstacle_height: 0.0 }
     track_unknown_space: false
-    inflation_option: 3
 
   inflation_layer:
     inflation_radius: 0.36
@@ -49,7 +46,7 @@ local_costmap:
 
   global_frame: map
   robot_base_frame: base_link
-  map_type: costmap
+  map_type: voxel
   footprint: [[0.3, 0.15], [0.25, 0.2], [-0.1, 0.2], [-0.1, -0.2], [0.25, -0.2], [0.3, -0.15]]
   footprint_padding: 0.0
 
@@ -64,17 +61,14 @@ local_costmap:
   resolution: 0.05
 
   keep_out_layer:
-    enabled: true
+    enabled: false
     fill_zones: false
-    inflation_option: 3
 
   obstacle_layer:
-    observation_sources: scan #camera
-    scan: { sensor_frame: top_laser_link, data_type: PointCloud2, topic: vlp_points, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true, min_obstacle_height: 0.01, max_obstacle_height: 0.655 }
-    #scan: { sensor_frame: laser_link, data_type: LaserScan, topic: scan, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true }
-    #camera: { sensor_frame: camera_front_link, data_type: PointCloud2, topic: /camera_front/depth/points, obstacle_range: 3.0, raytrace_range: 3.5, marking: true, clearing: true, min_obstacle_height: 0.1 }
+    observation_sources: scan camera
+    scan: { sensor_frame: laser_link, data_type: LaserScan, topic: scan, obstacle_range: 6.0, raytrace_range: 6.5, marking: true, clearing: true , min_obstacle_height: -1.0 }
+    camera: { sensor_frame: camera_front_link, data_type: PointCloud2, topic: /camera_front/depth/points, obstacle_range: 3.0, raytrace_range: 3.5, marking: true, clearing: true, min_obstacle_height: 0.1 }
     track_unknown_space: false
-    inflation_option: 3
 
   inflation_layer:
     inflation_radius: 0.36
